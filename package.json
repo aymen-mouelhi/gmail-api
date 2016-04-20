@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/aymen-mouelhi/gmail-api/issues"
   },
-  "homepage": "https://github.com/aymen-mouelhi/gmail-api#readme"
+  "homepage": "https://github.com/aymen-mouelhi/gmail-api#readme",
+  "dependencies": {
+    "request": "^2.72.0"
+  }
 }
