@@ -1,0 +1,24 @@
+{
+  "name": "gmail-api",
+  "version": "1.0.0",
+  "description": "Gmail API wrapper to make it easier to use the official api",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aymen-mouelhi/gmail-api.git"
+  },
+  "keywords": [
+    "gmail",
+    "api",
+    "wrapper"
+  ],
+  "author": "Aymen Mouelhi <aymen.mouelhi@gmail.com> (https://github.com/aymen-mouelhi)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aymen-mouelhi/gmail-api/issues"
+  },
+  "homepage": "https://github.com/aymen-mouelhi/gmail-api#readme"
+}
