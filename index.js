@@ -34,7 +34,7 @@ Gmail.prototype.getMessage = function(messageId, callback) {
 };
 
 
-Gmail.prototype.getMessageAttachements = function(messageId, callback) {
+Gmail.prototype.getAttachements = function(messageId, callback) {
     // Retrun content, from, subject, recieved on, id, snippet, attachments
 };
 
@@ -103,6 +103,7 @@ Gmail.prototype.createDraft = function(payload, callback) {
  * @return {[type]}            [description]
  */
 Gmail.prototype.createEmail = function(payload, callback) {
+
     var email_lines = [];
     email_lines.push("From: \"" + payload.from.name + "\" <" + payload.from.email + ">");
     email_lines.push("To: " + payload.to.email);
@@ -122,7 +123,6 @@ Gmail.prototype.createEmail = function(payload, callback) {
 
 
 Gmail.prototype._formatMessage = function(message, callback) {
-    
     var from;
     var subject;
     var date;
