@@ -1,38 +1,74 @@
 var request = require('request');
+var google = require('googleapis');
+var googleAuth = require('google-auth-library');
+var gmail = google.gmail('v1');
 
-var Gmail = function(key) {
-    if (!key) {
-        throw new Error('Access key required');
+var Gmail = function(auth, credentials) {
+    if (!auth) {
+        throw new Error('Authentication Object is required');
     }
-    this.key = key
+
+    this.auth = auth;
 }
 
+
 // Messages Management
-
-Gmail.prototype.getMessage = function(messageId, callback){
-	// Retrun content, sender, subject, recieved on, id, snippet, attachments
+Gmail.prototype.getMessage = function(messageId, callback) {
+    // Retrun content, sender, subject, recieved on, id, snippet, attachments
 };
 
 
-Gmail.prototype.getMessageAttachements = function(messageId, callback){
-	// Retrun content, sender, subject, recieved on, id, snippet, attachments
+Gmail.prototype.getMessageAttachements = function(messageId, callback) {
+    // Retrun content, sender, subject, recieved on, id, snippet, attachments
 };
 
-Gmail.prototype.getMessages = function(limit, fields, callback){
+Gmail.prototype.getMessages = function(limit, fields, callback) {
+	
+    var self = this;
+    var messages = [];
+
+    // Get All messages
+    gmail.users.messages.list({
+        auth: auth,
+        userId: 'me',
+        q: 'is:unread',
+        maxResults: limit
+    }, function(error, messages) {
+        if (error) {
+            callback(error);
+        } else {
+            async.eachSeries(messages, function(message, next) {
+                // Get Message
+                self.getMessage(message.id, function(error, gmailMessage) {
+                    if (error) {
+                        next(error);
+                    } else {
+                        messages.push(gmailMessage);
+                        next();
+                    }
+                });
+            }, function(error) {
+                if (error) {
+                    callback(error);
+                } else {
+                    callback(null, messages);
+                }
+            });
+        }
+    });
+};
+
+Gmail.prototype.getThreads = function(id, callback) {
 
 };
 
-Gmail.prototype.getThreads = function(id, callback){
-
-};
-
-Gmail.prototype.send = function(payload, callback){
+Gmail.prototype.send = function(payload, callback) {
 
 };
 
 // Draft Management
 
-Gmail.prototype.createDraft = function(payload, callback){
+Gmail.prototype.createDraft = function(payload, callback) {
 
 };
 
@@ -42,6 +78,6 @@ Gmail.prototype.createDraft = function(payload, callback){
 // Users Management
 
 // Private handlers
-Gmail.prototype._createEmail = function(payload, callback){
+Gmail.prototype._createEmail = function(payload, callback) {
 
 };
