@@ -76,6 +76,7 @@ Gmail.prototype.getMessages = function(limit, fields, callback) {
     });
 };
 
+
 Gmail.prototype.getThreads = function(id, callback) {
 
 };
@@ -94,14 +95,28 @@ Gmail.prototype.createDraft = function(payload, callback) {
 
 // Users Management
 
-// Private handlers
-Gmail.prototype._createEmail = function(payload, callback) {
 
+// Private handlers
+Gmail.prototype.createEmail = function(payload, callback) {
+    var email_lines = [];
+    email_lines.push("From: \"" + payload.from.name + "\" <" + payload.from.email + ">");
+    email_lines.push("To: " + payload.to.email);
+    email_lines.push('Content-type: text/html;charset=iso-8859-1');
+    email_lines.push('MIME-Version: 1.0');
+    email_lines.push("Subject: " + payload.subject);
+    email_lines.push("");
+    email_lines.push(payload.content);
+
+    var email = email_lines.join("\r\n").trim();
+
+    var base64EncodedEmail = new Buffer(email).toString('base64');
+    base64EncodedEmail = base64EncodedEmail.replace(/\+/g, '-').replace(/\//g, '_');
+
+    return base64EncodedEmail;
 };
 
 
 Gmail.prototype._formatMessage = function(message, callback) {
-
     var from;
     var subject;
     var date;
@@ -170,11 +185,16 @@ Gmail.prototype._formatMessage = function(message, callback) {
     }
 
     // Todo: Get Attachements
-
-
+    // Todo: Add name information in To / From
     var msg = {
-        from: from,
-        to: to,
+        from: {
+            name: ''
+            email: from
+        },
+        to: {
+            name: ''
+            email: to
+        },
         subject: subject,
         content: content,
         date: date
