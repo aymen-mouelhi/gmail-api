@@ -96,7 +96,12 @@ Gmail.prototype.createDraft = function(payload, callback) {
 // Users Management
 
 
-// Private handlers
+/**
+ * Create an Email Object as Gmail wants it to be
+ * @param  {[type]}   payload  [description]
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
 Gmail.prototype.createEmail = function(payload, callback) {
     var email_lines = [];
     email_lines.push("From: \"" + payload.from.name + "\" <" + payload.from.email + ">");
@@ -117,6 +122,7 @@ Gmail.prototype.createEmail = function(payload, callback) {
 
 
 Gmail.prototype._formatMessage = function(message, callback) {
+    
     var from;
     var subject;
     var date;
