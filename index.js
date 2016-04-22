@@ -15,6 +15,21 @@ var Gmail = function(auth, credentials) {
 // Messages Management
 Gmail.prototype.getMessage = function(messageId, callback) {
     // Retrun content, sender, subject, recieved on, id, snippet, attachments
+    if (messageId) {
+        gmail.users.messages.get({
+            auth: auth,
+            userId: 'me',
+            id: messageId
+        }, function(error, message) {
+            if (error) {
+                callback(error);
+            } else {
+                _formatMessage(message, callback);
+            }
+        });
+    } else {
+    	callback('Message Id cannot be empty');
+    }
 };
 
 
@@ -23,9 +38,11 @@ Gmail.prototype.getMessageAttachements = function(messageId, callback) {
 };
 
 Gmail.prototype.getMessages = function(limit, fields, callback) {
-	
+
     var self = this;
     var messages = [];
+
+    limit = limit || 100;
 
     // Get All messages
     gmail.users.messages.list({
