@@ -1,7 +1,7 @@
 {
   "name": "gmail-api",
-  "version": "1.0.0",
-  "description": "Gmail API wrapper to make it easier to use the official api",
+  "version": "0.0.1",
+  "description": "Developer friendly Gmail API wrapper to make it easier to use the official api",
   "main": "index.js",
   "scripts": {
     "test": "npm test"
@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/aymen-mouelhi/gmail-api#readme",
   "dependencies": {
+    "google-auth-library": "^0.9.7",
+    "googleapis": "^5.2.0",
     "request": "^2.72.0"
   }
 }
