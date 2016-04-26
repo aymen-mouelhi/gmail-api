@@ -12,6 +12,18 @@ var Gmail = function(auth, credentials) {
 }
 
 
+Gmail.prototype.setScopes = function(scopes){
+
+};
+
+
+Gmail.prototype.authorize = function(credentials){
+
+};
+
+
+
+
 // Messages Management
 Gmail.prototype.getMessage = function(messageId, callback) {
     // Retrun content, from, subject, recieved on, id, snippet, attachments
@@ -81,7 +93,7 @@ Gmail.prototype.getThreads = function(id, callback) {
 
 };
 
-Gmail.prototype.send = function(payload, callback) {
+Gmail.prototype.sendMessage = function(payload, callback) {
 
 };
 
@@ -102,7 +114,7 @@ Gmail.prototype.createDraft = function(payload, callback) {
  * @param  {Function} callback [description]
  * @return {[type]}            [description]
  */
-Gmail.prototype.createEmail = function(payload, callback) {
+Gmail.prototype.createMessage = function(payload, callback) {
 
     var email_lines = [];
     email_lines.push("From: \"" + payload.from.name + "\" <" + payload.from.email + ">");
